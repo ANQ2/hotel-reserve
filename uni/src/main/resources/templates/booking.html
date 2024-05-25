@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking System</title>
+</head>
+<body>
+<div>
+    <h2>Add Hotel Details</h2>
+    <label for="hotelName">Hotel Name:</label>
+    <input id="hotelName" type="text" placeholder="Enter Hotel Name">
+    <button onclick="addHotel()">Add Hotel</button>
+</div>
+
+<div>
+    <h2>Add Room</h2>
+    <label for="room_number">Room Number:</label>
+    <input id="room_number" type="number" placeholder="Enter Room Number">
+    <label for="Type">Room Type:</label>
+    <select id="Type">
+        <option value="standard">Standard</option>
+        <option value="vip">VIP</option>
+    </select>
+    <label for="Price">Room Price:</label>
+    <input id="Price" type="number" placeholder="Enter Room Price">
+    <button onclick="addRoom()">Add Room</button>
+</div>
+
+<script>
+    function addHotel() {
+        const hotelName = document.getElementById('hotelName').value;
+        fetch('http://localhost:8080/hotels', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: hotelName })
+        })
+            .then(response => response.text())
+            .then(data => {
+                alert(data); // Выводим сообщение о результате операции
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function addRoom() {
+        const roomNumber = document.getElementById('room_number').value;
+        const roomType = document.getElementById('Type').value;
+        const roomPrice = document.getElementById('Price').value;
+        fetch('http://localhost:8080/rooms', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ roomNumber, type: roomType, price: roomPrice })
+        })
+            .then(response => response.text())
+            .then(data => {
+                alert(data); // Выводим сообщение о результате операции
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>

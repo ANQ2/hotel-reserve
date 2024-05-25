@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Room</title>
+</head>
+<body>
+<h2>Add Room</h2>
+<form th:action="@{/rooms}" th:object="${roomDTO}" method="post">
+    <label for="number">Room Number:</label>
+    <input id="number" type="number" th:field="*{number}" placeholder="Enter Room Number" required>
+
+    <label for="type">Room Type:</label>
+    <select id="type" th:field="*{type}" required>
+        <option value="standard">Standard</option>
+        <option value="vip">VIP</option>
+    </select>
+
+    <label for="price">Room Price:</label>
+    <input id="price" type="number" th:field="*{price}" placeholder="Enter Room Price" required>
+
+    <button type="submit">Add Room</button>
+</form>
+</body>
+</html>
